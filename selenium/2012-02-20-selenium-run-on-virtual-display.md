@@ -1,4 +1,4 @@
-Selenium - run tests on a virtual display
+selenium - run tests on a virtual display
 ============================================
 
 Set up

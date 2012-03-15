@@ -1,4 +1,4 @@
-Easy way to checkout and track remote branch
+git - easy way to checkout and track remote branch
 ============================================
 
     #creates and checks out "feature" branch that tracks "origin/feature"

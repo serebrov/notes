@@ -26,7 +26,7 @@ Extend error handler class:
         }
     }
 
-Place it in `application/protected/components` and set in the `config/main.php`:
+Put it in `application/protected/components` and set in the `config/main.php`:
 
     return array(
         ...

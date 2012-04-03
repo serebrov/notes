@@ -12,4 +12,4 @@
 
 Links
 --------
-(stackoverflow)[http://stackoverflow.com/questions/1526794/git-rename-remote-branch]
+[stackoverflow](http://stackoverflow.com/questions/1526794/git-rename-remote-branch)

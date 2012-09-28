@@ -80,8 +80,11 @@ Final try - use $.ajaxSetup prefilters (works!)
     jQuery(function($) {
         $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
             var success = options.success;
-            //if reqested data type was text or html
-            if ('dataType' in options && ['text', 'html'].indexOf(options.dataType) != -1) {
+            //if reqested data type was text or html or *
+            if (options.dataTypes.indexOf("text") !=-1 ||
+                options.dataTypes.indexOf("html") != -1 ||
+                options.dataTypes.indexOf("*") != -1
+            ) {
                 options.success = function(data, textStatus, jqXHR) {
                     // override success handling
                     data = localizeText(data);
@@ -89,6 +92,7 @@ Final try - use $.ajaxSetup prefilters (works!)
                 };
             }
         });
+
         function localizeText(textValue) {
             var format;
             var localise = function () {
@@ -100,28 +104,27 @@ Final try - use $.ajaxSetup prefilters (works!)
             };
             var formats = jQuery.localtime.getFormat();
             var cssClass;
+            //convert text to jQuery var
+            var result = $(textValue);
             for (cssClass in formats) {
                 if (formats.hasOwnProperty(cssClass)) {
                     format = formats[cssClass];
-                    //convert text to jQuery var
-                    var result = $(textValue);
                     result.find("." + cssClass).each(localise);
-                    var text = "";
-                    //convert jQuery var back to text
-                    $(result).each(function(index){
-                        if (this.nodeName.toLowerCase() == 'script') {
-                            text += '<script type="text/javascript">'+$(this).html()+"</"+"script>";
-                        } else if (this.nodeType !== 1) {
-                            //skip non-elements (HTML comments, text, etc)
-                            return;
-                        } else {
-                            text += $(this).appendTo('<div>').parent().html();
-                        }
-                    });
-                    return text;
                 }
             }
-            return textValue;
+            var text = "";
+            //convert jQuery var back to text
+            $(result).each(function(index){
+                if (this.nodeName.toLowerCase() == 'script') {
+                    text += '<script type="text/javascript">'+$(this).html()+"</"+"script>";
+                } else if (this.nodeType !== 1) {
+                    //skip non-elements (HTML comments, text, etc)
+                    return;
+                } else {
+                    text += $(this).appendTo('<div>').parent().html();
+                }
+            });
+            return text;
         }
     });
 
@@ -150,6 +153,6 @@ Links
 -------------------
 [Extending Ajax: Prefilters, Converters, and Transports](http://api.jquery.com/extending-ajax/)
 
-[$.ajaxSuccess()](http://api.jquery.com/ajaxSuccess/)
+[jQuery docs: $.ajaxComplete()](http://api.jquery.com/ajaxComplete/)
 
 [Stackowerflow: How can I intercept ajax responses in jQuery before the event handler?](http://stackoverflow.com/questions/7256207/how-can-i-intercept-ajax-responses-in-jquery-before-the-event-handler)

@@ -86,9 +86,10 @@ jquery.localtimex.js
      * - on form submit value converted back to UTC and posted to server
      *
      * jQuery UI datepicker configuration:
-     * - add 'localtime' class for input (or any other class accordinly to jquery.localtime configuration)
+     * - add 'localtimex' plugin to date input 
      * - set dateFormat of a date picker accordingly to localtime plugin output format
-     *   - they use different standards for date presentation, so we have to describe the same presentation twice
+     *   - they use different standards for date presentation, 
+     *     so we have to describe the same presentation twice
      *   - for example: localtime plugin - 'MM/dd/yyyy', datepicker - 'mm/dd/yy'
      * - initial input value should be UTC in ISO format or empty
      */

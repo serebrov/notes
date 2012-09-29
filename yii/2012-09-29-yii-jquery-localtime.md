@@ -63,6 +63,8 @@ It will convert UTC value to local time, so user can work with it. Before form s
 jquery.localtimex.js
 -------------------------------------------
     /**
+     * @name jquery.localtimex.js
+     * @author Boris Serebrov
      *
      * Depends on: jQuery, jQuery UI datepicker (local date parsing),
      * jquery.localtime-0.5.js (http://code.google.com/p/jquery-localtime/)
@@ -140,3 +142,19 @@ jquery.localtimex.js
         }
       };
     }) (jQuery);
+    
+Links
+-------------------------------------------
+[Yii wiki: Local time zones and locales](http://www.yiiframework.com/wiki/197/local-time-zones-and-locales/)
+
+[Yii wiki: Using International Dates](http://www.yiiframework.com/wiki/183/using-international-dates/)
+
+[Yii extension: i18n-datetime-behavior](http://www.yiiframework.com/extension/i18n-datetime-behavior/)
+
+[Yii forum: DATETIME and internationalization](http://www.yiiframework.com/forum/index.php/topic/9950-datetime-and-internationalization/)
+
+[Yii forum: Dealing with i18N date formats](http://www.yiiframework.com/forum/index.php/topic/3649-dealing-with-i18n-date-formats/)
+
+[Yii playground: User input advanced example](http://www.yiiplayground.cubedwater.com/index.php?r=InternationalizationModule/datetime/userinput)
+
+[Yii playground: LocaleManager application component](http://www.yiiplayground.cubedwater.com/index.php?r=InternationalizationModule/datetime/localeManager)

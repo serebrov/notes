@@ -1,7 +1,8 @@
 Yii and jquery.localtime.js - display dates in user local timezone
 ===========================================
 
-With this method we work on the server with UTC timezone dates and convert them to a user local timezone on client.
+With this method we work on the server with UTC timezone dates and convert them 
+to a user local timezone on client.
 
 Use ‘TIMESTAMP’ type for date/datetime DB fields
 -------------------------------------------
@@ -40,7 +41,8 @@ Helper functions to convert dates:
 
 Add localtime plugin and localtimex extension
 -------------------------------------------
-Include scripts into the page (see jquery.localtimex.js script code at the end):
+Include scripts into the page, see [jquery.localtime.js plugin here](http://code.google.com/p/jquery-localtime/) and 
+jquery.localtimex.js code at the end:
 
     <script type="text/javascript" src="/js/jquery.localtime-0.5.js"></script>
     <script type="text/javascript" src="/js/jquery.localtimex.js"></script>

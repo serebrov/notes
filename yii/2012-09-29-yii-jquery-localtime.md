@@ -50,7 +50,7 @@ method (or remove jQuery.ready block at the end of jquery.localtime.js).
     <script type="text/javascript" src="/js/jquery.localtimex.js"></script>
     <script type="text/javascript">$.localtime.setFormat({}); </script>
 
-Use localtimex (do not do initialization for jquery.localtime.js):
+Use localtimex:
 
     <script type="text/javascript">
         $('.localtime').localtimex('dd MMM yyyy HH:mm:ss');

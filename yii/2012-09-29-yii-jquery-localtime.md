@@ -42,10 +42,13 @@ Helper functions to convert dates:
 Add localtime plugin and localtimex extension
 -------------------------------------------
 Include scripts into the page, see [jquery.localtime.js plugin here](http://code.google.com/p/jquery-localtime/) and 
-jquery.localtimex.js code at the end:
+jquery.localtimex.js code at the end.
+To disable jquery.localtime.js default initialization pass empty format to setFormat() 
+method (or remove jQuery.ready block at the end of jquery.localtime.js).
 
     <script type="text/javascript" src="/js/jquery.localtime-0.5.js"></script>
     <script type="text/javascript" src="/js/jquery.localtimex.js"></script>
+    <script type="text/javascript">$.localtime.setFormat({}); </script>
 
 Use localtimex (do not do initialization for jquery.localtime.js):
 

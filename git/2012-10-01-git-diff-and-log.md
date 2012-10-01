@@ -6,6 +6,7 @@ Diff staged changes
 
     git diff --cached
 or
+
     git diff --staged
 
 Diff pulled changes

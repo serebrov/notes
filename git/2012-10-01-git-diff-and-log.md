@@ -92,7 +92,11 @@ Log - exclude other branch commits
 -------------------------------------------
 Exclude master commits:
 
-    git log contrib --not master (or    git log contrib ^master)
+    git log contrib --not master (or git log contrib ^master)
+    
+Exclude master commits and merges:
+
+    git log contrib ^master --no-merges
 
 What added in remote branch, but not in local:
 

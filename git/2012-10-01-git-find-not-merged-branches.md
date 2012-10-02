@@ -20,6 +20,6 @@ Merged with `feature`:
 
     git branch -a --merged feature
 
-Merged with `feature`:
+Not merged with `feature`:
 
     git branch -a --no-merged feature

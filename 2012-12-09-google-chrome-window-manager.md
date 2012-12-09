@@ -91,7 +91,7 @@ Manipulates (splits, merges, scrolls, indexes) Chrome's windows with simple clic
 Split Screen Layouts made easy. Automates resizing tab windows to predefined and user defined layouts.
 A simple extension designed to provide ease in resizing your tabs. A set of default layouts are provided but you can add and remove from the list of layouts to fit your needs.
 
-(DEMO video)[https://www.youtube.com/watch?v=SD3hrdxn3QU]
+[DEMO video](https://www.youtube.com/watch?v=SD3hrdxn3QU)
 
 ### How it works ###
 * The selected/highlighted tab along with all tabs to the right of it will be considered. Whether you have more or less tabs than are needed the extension will resize only the available tabs.
@@ -115,8 +115,9 @@ Makes a vertical split by productively moving the tab to the side, instead of us
 This extension makes a vertical split for vieing two tabs at once. It's accomplished by resizing your current window, and putting the current tab to the right of it.
 
 
-Other:
+Other
+--------------------------------------------
 
-http://superuser.com/questions/219511/browser-instead-of-window-manager
+[Browser instead of window manager](http://superuser.com/questions/219511/browser-instead-of-window-manager)
 
-https://chrome.google.com/webstore/detail/project-tab-manager/iapdnheekciiecjijobcglkcgeckpoia
+[Project Tab Manager](https://chrome.google.com/webstore/detail/project-tab-manager/iapdnheekciiecjijobcglkcgeckpoia)

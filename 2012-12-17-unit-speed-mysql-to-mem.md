@@ -114,14 +114,14 @@ Check db state script
 
 Links
 --------------------------------------------
-(Unit test application including database is too slow)[http://stackoverflow.com/questions/9500032/unit-test-application-including-database-is-too-slow]
+[Unit test application including database is too slow](http://stackoverflow.com/questions/9500032/unit-test-application-including-database-is-too-slow)
 
-(Force an entire MySQL database to be in memory)[http://stackoverflow.com/questions/4894850/force-an-entire-mysql-database-to-be-in-memory]
+[Force an entire MySQL database to be in memory](http://stackoverflow.com/questions/4894850/force-an-entire-mysql-database-to-be-in-memory)
 
-(How to run django's test database only in memory?)[http://stackoverflow.com/questions/3096148/how-to-run-djangos-test-database-only-in-memory]
+[How to run django's test database only in memory?](http://stackoverflow.com/questions/3096148/how-to-run-djangos-test-database-only-in-memory)
 
-(Script to put mysqld on a ram disk in ubuntu 10.04. Runs on every hudson slave boot)[https://gist.github.com/1152547]
+[Script to put mysqld on a ram disk in ubuntu 10.04. Runs on every hudson slave boot](https://gist.github.com/1152547)
 
-(MySQL tmpdir on /dev/shm)[http://www.indimon.co.uk/2012/mysql-tmpdir-on-devshm/]
+[MySQL tmpdir on /dev/shm](http://www.indimon.co.uk/2012/mysql-tmpdir-on-devshm/)
 
-(How can I get around MySQL Errcode 13 with SELECT INTO OUTFILE?)[http://stackoverflow.com/questions/2783313/how-can-i-get-around-mysql-errcode-13-with-select-into-outfile]
+[How can I get around MySQL Errcode 13 with SELECT INTO OUTFILE?](http://stackoverflow.com/questions/2783313/how-can-i-get-around-mysql-errcode-13-with-select-into-outfile)

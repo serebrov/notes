@@ -1,7 +1,7 @@
 PHP - utf-8 strings handling
 ============================================
 
-Enable mbstring (function overloading mode)[http://www.php.net/manual/en/mbstring.overload.php] and set default
+Enable mbstring [function overloading mode](http://www.php.net/manual/en/mbstring.overload.php) and set default
 encoding for string functions to utf-8 in php.ini:
 
     mbstring.internal_encoding = UTF-8

@@ -23,6 +23,8 @@ Here is the example from above with pre-rendered content:
         <li ng-repeat="item in items" ng-bind="item.name"></li>
     </script>
 
+This way we have initial content for search bots and instructions for angular at the same time.
+
 Other approaches to this problem include running angular on the server or crawling pages with a headless browser and
 serve static pages to search bots (see links below).
 

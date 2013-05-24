@@ -17,7 +17,7 @@ On the server you can parse input and then decode data from json:
 Client-side solution
 --------------------------------------------
 
-On the client side the data can be send in a way PHP expects it:
+On the client side the data can be sent in a way PHP expects it:
 
     $http({
         url:url

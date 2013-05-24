@@ -12,7 +12,7 @@ The simple way to make this content SEO-friendly is to pre-render data on the se
 then allow angular to do it's job on the client.
 For simple variables there is [ng-bind](http://docs.angularjs.org/api/ng.directive:ngBind).
 And for lists there is [ng-include](http://docs.angularjs.org/api/ng.directive:ngInclude).
-Here is example above with pre-rendered content:
+Here is the example from above with pre-rendered content:
 
     <span ng-bind="variableValue">Static indexed value</span>
     <ul ng-include="'your/dynamic/list'">
@@ -23,7 +23,7 @@ Here is example above with pre-rendered content:
         <li ng-repeat="item in items" ng-bind="item.name"></li>
     </script>
 
-There are also attempts to run angular on the server or suggestions to crawl pages with headless browser and
+Other approaches to this problem include running angular on the server or crawling pages with a headless browser and
 serve static pages to search bots (see links below).
 
 Links

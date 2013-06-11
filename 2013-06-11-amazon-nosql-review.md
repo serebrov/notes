@@ -264,7 +264,7 @@ Dynamo db pricing page (http://aws.amazon.com/dynamodb/pricing/) and price calcu
 
 Assumptions (having events table described above):
 
-- each user (user_id in events table) we add 1 million records per day (24 hours)
+- for each user (user_id in events table) we add 1 million records per day (24 hours)
 - each logged event data size is about 256 Bytes
 - DynamoDB table does not have local secondary indexes
 

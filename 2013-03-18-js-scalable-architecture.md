@@ -19,7 +19,7 @@ In short, the architecture contains following application layers:
 * sandbox:
   * facade for modules above the core
   * interaction between modules via messages (events)
-* modules
+* modules:
   * do not know about each other, only about sandbox
   * call only own methods or sandbox methods
   * DOM access only inside own box (but do not use base library)
@@ -32,7 +32,7 @@ Here are some questions raised by the presentation:
 * Modules do not interact directly and only send messages to each other. This way we can change them independently. But messages are sent with some data and the receiver should expect some data structure. So in the case when this data changes it is necessary to review and fix all possible receivers.
 * App core responsibilities are too wide (rememver "anything!") and the same is related to sandbox (because it acts as a facade on top of the core).
 
-Of course good answers can be found for all these points and more questions can be raised. It is clear that suggested architecture is an idea and the way to go but not a complete design.
+Of course good answers can be found for all these points and more questions can be raised. It is clear that the suggested architecture is an idea and the way to go but not a complete design.
 It was interesting to see if there are frameworks build upon this idea.
 And here is the list (descriptions are taken from their sites):
 
@@ -58,7 +58,7 @@ Besides the main parts of the scalable architecture AngularJS has more. For exam
 
 And angular controllers are very similar to scalable architecture modules:
 * self-contained and sandboxed
-* can be built in pure JS without access to base library
+* can be built in pure JS without access to the base library
 * interaction between modules is done via events or via special service but not directly
 
 This way the idea of the scalable architecture is present in the AngularJS. And angular also gives other essential components (views, models, services, etc) and provides complete and ready to use architecture.

@@ -12,7 +12,7 @@ Amazon provides following [NoSQL](https://en.wikipedia.org/wiki/NoSQL) storage o
   up, operate, and scale.
 
 
-Amazon's review for big data solutions
+Amazon's review of big data solutions
 --------------------------------------------
 Amazon's review [Big Data on AWS](http://aws.amazon.com/big-data/) mentions
 only DynamoDB and Elastic Map Reduce (based on Hadoop) as tools for big data
@@ -167,7 +167,7 @@ DynamoDB limitations:
 * Export - no (we can not get more then 1MB via single request)
 
 Additional indexes to perform data filtering (see
-http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GuidelinesForLSI.html):
+http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GuidelinesForLSI.html ):
 having many indexes is not recommended because they consume storage and
 provisioned throughput and make table operations slower.
 
@@ -197,8 +197,9 @@ with the same hash key
     API to retrieve all the objects under the hash key “X”, sort the results by
     shipment date and then filter out older records.
 
-It is not possible to add secondary indexes into existing table. Existing
-indexes also can not be changed or deleted. This complicates future changes.
+It is not possible to add secondary indexes into existing table.
+
+Existing indexes also can not be changed or deleted.
 
 Query results sorting:
 
@@ -234,8 +235,7 @@ Single operation size limit:
     logic to assemble the pages of results into one dataset.
 
 Export - data export can be implemented as off-line operation using Elastic Map
-Reduce
-(http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/EMRforDynamoDB.html):
+Reduce. See [Elastic Map Reduce use cases](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/EMRforDynamoDB.html):
 
 * Exporting data stored in Amazon DynamoDB to Amazon S3.
 * Importing data in Amazon S3 to Amazon DynamoDB.
@@ -243,9 +243,7 @@ Reduce
 * Joining data stored in Amazon DynamoDB and exporting it or querying against the joined data.
 * Loading Amazon DynamoDB data into the Hadoop Distributed File System (HDFS) and using it as input into an Amazon EMR job flow.
 
-To perform advanced queries on data it is also possible to copy data to Amazon
-Redshift
-(http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/RedshiftforDynamoDB.html):
+To perform advanced queries on data it is also possible to [copy data to Amazon Redshift](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/RedshiftforDynamoDB.html):
 
     Amazon Redshift complements Amazon DynamoDB with advanced business intelligence
     capabilities and a powerful SQL-based interface. When you copy data from an
@@ -260,7 +258,7 @@ Redshift
 
 Cost
 --------------------------------------------
-Dynamo db pricing page (http://aws.amazon.com/dynamodb/pricing/) and price calculator (http://calculator.s3.amazonaws.com/calc5.html#s=DYNAMODB).
+Dynamo db [pricing page](http://aws.amazon.com/dynamodb/pricing/) and [price calculator](http://calculator.s3.amazonaws.com/calc5.html#s=DYNAMODB).
 
 Assumptions (having events table described above):
 
@@ -275,12 +273,12 @@ Parameters for cost calculation:
 * Number or read requests: for simplicity assume we have no read requests (read requests are much cheaper then write requests)
 * Data size added per month: 30 million record * 0.25KB ~= 7GB
 
-Cost (according to the price calculator) is about $6500 per month (for one user data).
+Cost (according to the price calculator) is about $6500 per month (for a single user's data).
 
 Notes:
 
-* reads are much cheaper then writes, so if we add the same number or reads into calculation it will not grow much.
-* we pay not for actual load, but for reserved load. So if we set writes per
+* Reads are much cheaper then writes, so if we add the same number or reads into calculation it will not grow much.
+* We pay not for actual load, but for reserved load. So if we set writes per
   second to 12000 then we will pay for this even if actual load will be low.
   Limits can be changed to higher value at any time, but can be lowered only 4
   times per day.
@@ -291,21 +289,17 @@ Other DynamoDB resources
 
 [Amazon DynamoDB – a Fast and Scalable NoSQL Database Service Designed for Internet Scale Applications](http://www.allthingsdistributed.com/2012/01/amazon-dynamodb.html)
 
-[Why My Team Went with DynamoDB Over MongoDB] (http://slashdot.org/topic/bi/why-my-team-went-with-dynamodb-over-mongodb/)
-- limitations and possible solutions
-- custom index (maybe at that time secondary indexes where not present).
-- data as json + compression (other way is to store data as file to S3)
+[Why My Team Went with DynamoDB Over MongoDB] (http://slashdot.org/topic/bi/why-my-team-went-with-dynamodb-over-mongodb/) - limitations and possible solutions;
+custom index (maybe at that time secondary indexes where not present); data as json + compression (other way is to store data as file to S3).
 
-[DynamoDB shortcomings (and our work arounds)](https://www.dailycred.com/blog/10/dynamodb-shortcomings-and-our-work-arounds)
-- they decided not to use DynamoDB for events (SQL was a better tool in this
-  case, so we decided not to use DynamoDB at all for storing events) and build
-  cache between DynamoDB and their app.
+[DynamoDB shortcomings (and our work arounds)](https://www.dailycred.com/blog/10/dynamodb-shortcomings-and-our-work-arounds) they decided not to use DynamoDB for events (SQL was a better tool in this
+case, so we decided not to use DynamoDB at all for storing events) and build cache between DynamoDB and their app.
 
-[DYNAMODB IS AWESOME, BUT…](http://simondlr.com/post/26360955465/dynamodb-is-awesome-but) - about limitations
+[DYNAMODB IS AWESOME, BUT…](http://simondlr.com/post/26360955465/dynamodb-is-awesome-but) - about limitations.
 
-[Amazon DynamoDB](http://blog.coredumped.org/2012/01/amazon-dynamodb.html) - about provisioned throughput, Query, Scan and indexing
+[Amazon DynamoDB](http://blog.coredumped.org/2012/01/amazon-dynamodb.html) - about provisioned throughput, Query, Scan and indexing.
 
-[Expanding the Cloud: Faster, More Flexible Queries with DynamoDB](http://www.allthingsdistributed.com/2013/04/dynamdb-local-secondary-indices.html) - about secondary indexes
+[Expanding the Cloud: Faster, More Flexible Queries with DynamoDB](http://www.allthingsdistributed.com/2013/04/dynamdb-local-seconda.ry-indices.html) - about secondary indexes
 
 [My Disappointments with Amazon DynamoDB] (http://whynosql.com/my-disappointments-with-amazon-dynamodb/)
 
@@ -313,19 +307,19 @@ Other DynamoDB resources
 
 Amazon forum threads:
 
-* https://forums.aws.amazon.com/message.jspa?messageID=333470
-* https://forums.aws.amazon.com/thread.jspa?messageID=454521
-* https://forums.aws.amazon.com/thread.jspa?messageID=449080
-* https://forums.aws.amazon.com/thread.jspa?messageID=449927
-* https://forums.aws.amazon.com/message.jspa?messageID=361520
-* https://forums.aws.amazon.com/thread.jspa?messageID=312101
+* [data import/export](https://forums.aws.amazon.com/message.jspa?messageID=333470)
+* [DynamoDB Use case](https://forums.aws.amazon.com/thread.jspa?messageID=454521)
+* [DynamoDB Table Design](https://forums.aws.amazon.com/thread.jspa?messageID=449080)
+* [Can i build a leaderboard with local secondary index?](https://forums.aws.amazon.com/thread.jspa?messageID=449927)
+* [DynamoDB Hash key partition strategy](https://forums.aws.amazon.com/message.jspa?messageID=361520)
+* [Partition size / key range info](https://forums.aws.amazon.com/thread.jspa?messageID=312101)
 
 DynamoDB mocks:
 
-* https://forums.aws.amazon.com/message.jspa?messageID=329773
-* https://github.com/perrystreetsoftware/clientside_aws
-* https://github.com/ananthakumaran/fake_dynamo
-* https://github.com/mboudreau/Alternator
+* [Forum thread: DynamoDB Mock](https://forums.aws.amazon.com/message.jspa?messageID=329773)
+* [clientside_aws](https://github.com/perrystreetsoftware/clientside_aws)
+* [FakeDynamo](https://github.com/ananthakumaran/fake_dynamo)
+* [Alternator - A DynamoDB Mock Server](https://github.com/mboudreau/Alternator)
 
 Amazon SimpleDB
 ============================================
@@ -334,12 +328,15 @@ General Info
 --------------------------------------------
 [Simple DB description page](http://aws.amazon.com/simpledb/).
 
-API/SDK: There is PHP SDK (https://github.com/aws/aws-sdk-php) and HTTP API
-(http://docs.aws.amazon.com/AmazonSimpleDB/2009-04-15/DeveloperGuide/SDB_API.html).
-
 [Developer Guide](http://docs.aws.amazon.com/AmazonSimpleDB/2009-04-15/DeveloperGuide/Welcome.html).
 
-**[Complex Queries](http://docs.aws.amazon.com/AmazonSimpleDB/latest/DeveloperGuide/UsingSelect.html)**
+[PHP SDK](https://github.com/aws/aws-sdk-php) and [HTTP API](http://docs.aws.amazon.com/AmazonSimpleDB/2009-04-15/DeveloperGuide/SDB_API.html).
+
+
+Features
+--------------------------------------------
+
+[Complex Queries](http://docs.aws.amazon.com/AmazonSimpleDB/latest/DeveloperGuide/UsingSelect.html)
 
     One of the main uses for Amazon SimpleDB involves making complex queries
     against your data set, so you can get exactly the data you need. For more
@@ -352,12 +349,12 @@ Select operator supports:
 - count() (but query should be no longer then 5 seconds otherwise you will get partial result and need to repeat count() operation)
 - max / min values can be selected using ordering by value and limit 1.
 
-**Data Storage and Performance**
+Data Storage and Performance
 
     For information on how quickly stored data is recorded to Amazon SimpleDB,
     refer to the Consistency section of the Amazon SimpleDB Developer Guide.
 
-**[Limits and Restrictions](http://docs.aws.amazon.com/AmazonSimpleDB/latest/DeveloperGuide/SDBLimits.html)**
+[Limits and Restrictions](http://docs.aws.amazon.com/AmazonSimpleDB/latest/DeveloperGuide/SDBLimits.html)
 
     During development, it is important to understand Amazon SimpleDB's limits
     when storing data, the amount of data Amazon SimpleDB can return from a
@@ -377,7 +374,7 @@ Limits:
     Designed for use with other Amazon Web Services—Amazon SimpleDB is designed to integrate easily with other web-scale services such as Amazon EC2 and Amazon S3.
     For example, developers can run their applications in Amazon EC2 and store their data objects in Amazon S3. Amazon SimpleDB can then be used to query the object metadata from within the application in Amazon EC2 and return pointers to the objects stored in Amazon S3.
 
-[Partition data to domains](http://docs.aws.amazon.com/AmazonSimpleDB/latest/DeveloperGuide/DataSetPartitioningConcepts.html).
+[Partition data to domains strategy](http://docs.aws.amazon.com/AmazonSimpleDB/latest/DeveloperGuide/DataSetPartitioningConcepts.html).
 
 SimpleDB as events storage and limitations
 --------------------------------------------
@@ -456,10 +453,10 @@ For events storage we have:
 
 * query /filter data with different criteria: can be done with SimpleDB, much more complex with DynamoDB
 * sort data: yes for SimpleDB, no for DynamoDB (fixed sorting)
-* export data: complex for both, need to introduce offline operation (this is good to do even with MySQL)
-* response time / requests performane: much better with DynamoDB
-* table size limit and scaling: better with DynamoDB
-* cost: much higher with DynamoDB
+* export data: complex for both, need to implement offline operation
+* response time / requests performane: much better for DynamoDB
+* table size limit and scaling: better for DynamoDB
+* cost: much higher for DynamoDB
 
 Additional resources
 --------------------------------------------
@@ -493,25 +490,20 @@ General Resourses
 
 Some Other NoSQL solutions
 --------------------------------------------
-[MongoDB](http://www.mongodb.org/)
+[MongoDB](http://www.mongodb.org/) and [MongoDB use cases: Storing log data](http://docs.mongodb.org/manual/use-cases/storing-log-data/).
 
-  [MongoDB use cases: Storing log data](http://docs.mongodb.org/manual/use-cases/storing-log-data/)
-  [MongoDB NoSQL Database on AWS](http://d36cz9buwru1tt.cloudfront.net/AWS_NoSQL_MongoDB.pdf)
+[MongoDB NoSQL Database on AWS](http://d36cz9buwru1tt.cloudfront.net/AWS_NoSQL_MongoDB.pdf).
 
-[Cassandra](http://cassandra.apache.org/)
+[Cassandra](http://cassandra.apache.org/) and [Cassandra use cases](http://wiki.apache.org/cassandra/UseCases).
 
-  [Cassandra use cases](http://wiki.apache.org/cassandra/UseCases)
+[Hypertable](http://hypertable.com/why_hypertable/).
 
-[Hypertable](http://hypertable.com/why_hypertable/)
+[HBase](http://hbase.apache.org/).
 
-[HBase](http://hbase.apache.org/)
+[CouchDB](http://couchdb.apache.org/).
 
-[CouchDB](http://couchdb.apache.org/)
+[VoltDB](http://voltdb.com/).
 
-  Syncing online and offline data. This is a niche CouchDB has targeted.
+[Is VoltDB really as scalable as they claim?](http://www.mysqlperformanceblog.com/2011/02/28/is-voltdb-really-as-scalable-as-they-claim/).
 
-[VoltDB](http://voltdb.com/)
-
-  [Is VoltDB really as scalable as they claim?](http://www.mysqlperformanceblog.com/2011/02/28/is-voltdb-really-as-scalable-as-they-claim/)
-
-  [VoltDB Decapitates Six SQL Urban Myths And Delivers Internet Scale OLTP In The Process](http://highscalability.com/blog/2010/6/28/voltdb-decapitates-six-sql-urban-myths-and-delivers-internet.html)
+[VoltDB Decapitates Six SQL Urban Myths And Delivers Internet Scale OLTP In The Process](http://highscalability.com/blog/2010/6/28/voltdb-decapitates-six-sql-urban-myths-and-delivers-internet.html).

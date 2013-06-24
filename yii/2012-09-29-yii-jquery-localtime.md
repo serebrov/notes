@@ -1,7 +1,7 @@
 Yii and jquery.localtime.js - display dates in user local timezone
 ===========================================
 
-With this method we work on the server with UTC timezone dates and convert them 
+With this method we work on the server with UTC timezone dates and convert them
 to a user local timezone on client.
 
 Use ‘TIMESTAMP’ type for date/datetime DB fields
@@ -18,7 +18,7 @@ Yii db config (MySQL):
         'connectionString' => '...’,
         'initSQLs'=>"set time_zone='+00:00’;",
     );
-    
+
 And PHP timezone:
 
     date_default_timezone_set(‘UTC’);
@@ -28,22 +28,22 @@ Generate HTML with UTC dates in ISO 8601
 See [date formats here](http://code.google.com/p/jquery-localtime/wiki/Usage)
 Helper functions to convert dates:
 - MySQL date to UTC
- 
+
     $utcString = gmdate('Y-m-d\TH:i:s\Z', strtotime($dateTimeString));
 
 - UTC date to HTML
- 
+
     echo CHtml::tag('span', array('class'=>'localtime'), $utcString);
 
 - UTC date to timestamp
- 
+
      $ts = strtotime($utcString);
 
 Add localtime plugin and localtimex extension
 -------------------------------------------
-Include scripts into the page, see [jquery.localtime.js plugin here](http://code.google.com/p/jquery-localtime/) and 
+Include scripts into the page, see [jquery.localtime.js plugin here](http://code.google.com/p/jquery-localtime/) and
 jquery.localtimex.js code at the end.
-To disable jquery.localtime.js default initialization pass empty format to setFormat() 
+To disable jquery.localtime.js default initialization pass empty format to setFormat()
 method (or remove jQuery.ready block at the end of jquery.localtime.js).
 
     <script type="text/javascript" src="/js/jquery.localtime-0.5.js"></script>
@@ -61,9 +61,28 @@ Date format is ISO 8601, see [description](http://code.google.com/p/jquery-local
 
 Date inputs
 -------------------------------------------
-jquery.localtimex.js plugin also supports date inputs localization (tested with jQuery UI datepicker and depends on it). 
+jquery.localtimex.js plugin also supports date inputs localization (tested with jQuery UI datepicker and depends on it).
 
 It will convert UTC value to local time, so user can work with it. Before form submit plugin will convert it back to UTC.
+
+Example of usage:
+
+# Use initial UTC value for date input or leave it empty:
+
+    $myDate = gmdate('Y-m-d\TH:i:s\Z', time()); //today, use it as initial date input value
+
+# When configuring the jQuery datepicker plugin - set date format to 'mm/dd/yy' and add css class 'localdatepicker'.
+
+# Attach jquery.localtimex plugin to the same input, set date format to 'MM/dd/yyyy' and use css class 'localdatepicker':
+
+    $('.localdatepicker').localtimex('MM/dd/yyyy');
+
+# On the client side localtimex plugin will convert initial UTC value to the local client time and then will convert it back when form is submitted
+
+# On the server side - accept UTC value, convert it to the MySQL format / timestamp:
+
+    $myDateMySql = Yii::app()->dateFormatter->format('yyyy-MM-dd', strtotime($UTCValue));
+    $myDateTimestamp = strtotime($UTCValue);
 
 jquery.localtimex.js
 -------------------------------------------
@@ -91,21 +110,21 @@ jquery.localtimex.js
      * - on form submit value converted back to UTC and posted to server
      *
      * jQuery UI datepicker configuration:
-     * - add 'localtimex' plugin to date input 
+     * - add 'localtimex' plugin to date input
      * - set dateFormat of a date picker accordingly to localtime plugin output format
-     *   - they use different standards for date presentation, 
+     *   - they use different standards for date presentation,
      *     so we have to describe the same presentation twice
      *   - for example: localtime plugin - 'MM/dd/yyyy', datepicker - 'mm/dd/yy'
      * - initial input value should be UTC in ISO format or empty
      */
     (function($) {
       $.fn.localtimex = function(format, opt) {
-    
+
         format = format || 'yyyy-MM-dd HH:mm:ss';
         opt = $.extend({
             'ajaxLocalize': true
         }, opt);
-    
+
         if (opt.ajaxLocalize) {
           var self = this;
           $('body').ajaxComplete(function() {
@@ -114,7 +133,7 @@ jquery.localtimex.js
             });
           });
         }
-    
+
         return this.each(function() {
           $.localtimex.localize(this, format);
           if ($(this).is(":input")) {
@@ -130,7 +149,7 @@ jquery.localtimex.js
           }
         });
       };
-    
+
       $.localtimex = {
         localize: function(element, format) {
           if (!$(element).attr('data-localized')) {
@@ -148,7 +167,7 @@ jquery.localtimex.js
         }
       };
     }) (jQuery);
-    
+
 Links
 -------------------------------------------
 [Yii wiki: Local time zones and locales](http://www.yiiframework.com/wiki/197/local-time-zones-and-locales/)

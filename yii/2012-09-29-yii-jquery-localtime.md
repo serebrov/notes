@@ -67,19 +67,19 @@ It will convert UTC value to local time, so user can work with it. Before form s
 
 Example of usage:
 
-# Use initial UTC value for date input or leave it empty:
+1. Use initial UTC value for date input or leave it empty:
 
     $myDate = gmdate('Y-m-d\TH:i:s\Z', time()); //today, use it as initial date input value
 
-# When configuring the jQuery datepicker plugin - set date format to 'mm/dd/yy' and add css class 'localdatepicker'.
+1. When configuring the jQuery datepicker plugin - set date format to 'mm/dd/yy' and add css class 'localdatepicker'.
 
-# Attach jquery.localtimex plugin to the same input, set date format to 'MM/dd/yyyy' and use css class 'localdatepicker':
+1. Attach jquery.localtimex plugin to the same input, set date format to 'MM/dd/yyyy' and use css class 'localdatepicker':
 
     $('.localdatepicker').localtimex('MM/dd/yyyy');
 
-# On the client side localtimex plugin will convert initial UTC value to the local client time and then will convert it back when form is submitted
+1. On the client side localtimex plugin will convert initial UTC value to the local client time and then will convert it back when form is submitted
 
-# On the server side - accept UTC value, convert it to the MySQL format / timestamp:
+1. On the server side - accept UTC value, convert it to the MySQL format / timestamp:
 
     $myDateMySql = Yii::app()->dateFormatter->format('yyyy-MM-dd', strtotime($UTCValue));
     $myDateTimestamp = strtotime($UTCValue);

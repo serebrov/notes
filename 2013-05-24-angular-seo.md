@@ -30,7 +30,7 @@ complex pages or if there are many pages.  Actually what we do is duplicate the
 content - we provide static content on the server site and then angular
 requests content dynamically an overrides static data.
 
-A better (and more complex) solution is to crawl the website and give page
+A better (and more complex) solution is to crawl the website and give static page
 snapshots to search engines.  This can be done with a headless browser like
 [PhantomJS](http://phantomjs.org/) which you can run periodically to generate
 static page snapshots.

@@ -50,3 +50,5 @@ Links
 [Ajax crawling - google developers] (https://developers.google.com/webmasters/ajax-crawling/docs/getting-started)
 
 [AngularJS and SEO - approach based on PantomJS] (http://www.yearofmoo.com/2012/11/angularjs-and-seo.html) and [github repository](https://github.com/steeve/angular-seo)
+
+[BroomBone - make your javascript powered website crawlable by Google (and other search engines)] (http://www.brombone.com)

@@ -54,11 +54,11 @@ Sequrity - set git-shell for the git user:
 On the user side - clone the repository or add a remote to existing repository:
 
     # clone
-    $ git clone ssh://git@server.host.name/home/git/re/sugar.git
+    $ git clone ssh://git@server.host.name/home/git/server/project.git
 
     # or add remote
     $ cd project
-    $ git remote add origin git@server.host.name:/home/git/re/sugar.git
+    $ git remote add origin git@server.host.name:/home/git/server/project.git
 
 For 'server.host.name' there are several options:
 * if the server has a domain name then just use it
@@ -115,7 +115,7 @@ Configure notifications:
     $ git config hooks.mailinglist "user1@example.com user2@example.com"
 
     # send emails from
-    $ git config hooks.envelopesender git@algo-rithm.com
+    $ git config hooks.envelopesender git@myserver.com
 
     # email subject prefix
     $ git config hooks.emailprefix "[Git]"

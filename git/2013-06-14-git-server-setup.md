@@ -58,7 +58,7 @@ On the user side - clone the repository or add a remote to existing repository:
 
     # or add remote
     $ cd project
-    $ git remote add origin git@server.host.name:/home/git/server/project.git
+    $ git remote add origin ssh://git@server.host.name/home/git/server/project.git
 
 For 'server.host.name' there are several options:
 * if the server has a domain name then just use it
@@ -72,7 +72,7 @@ For 'server.host.name' there are several options:
 This is OK and it will work, additional setup can be done to allow the git user to log-in via ssh
 and execute special commands like "list" to get repository listing.
 See:
-* main git-shell
+* man git-shell
 * cat /usr/share/doc/git/contrib/git-shell-commands/README
 * http://serverfault.com/questions/285324/git-shell-not-enabled
 
@@ -85,7 +85,7 @@ In my case there were errors related to git user's .ssh and authorized_keys perm
     ...
     Aug 15 15:47:48 seb-ubu sshd[7145]: Authentication refused: bad ownership or modes for directory /home/git/.ssh
 
-Fixing access permissions as described above fixed the issue.
+Changing access permissions as described above fixed the issue.
 
 #### How to make existing git repository bare
 
@@ -146,6 +146,8 @@ Send a test email:
 
 If you have problems with emails then check the log: /var/log/mail.log and error log: /var/log/mail.err.
 
+### Setup SMTP for sendmail
+
 If you want to setup SMTP server for you emails do the following:
 
     $ cd /etc/mail
@@ -157,8 +159,11 @@ Enter following line into the client-info file:
 
     AuthInfo:smtp.server.com "U:mymail@server.com" "I:mymail@server.com" "P:mypassword"
 
-See details about parameters above [here](http://www.scalix.com/wiki/index.php?title=Configuring_Sendmail_with_smarthost_Ubuntu_Gutsy).
-Continue:
+Here you put you smtp server name (instead of 'smtp.server.com') and your credentials.
+'U' is an smtp user (usually your email), 'I' is an account (usually also your email) and 'P' is a password.
+See details for parameters [here](http://www.scalix.com/wiki/index.php?title=Configuring_Sendmail_with_smarthost_Ubuntu_Gutsy).
+
+Continue setup:
 
     $ sudo bash -c "makemap hash client-info < client-info"
 

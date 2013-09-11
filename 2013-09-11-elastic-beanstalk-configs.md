@@ -140,7 +140,6 @@ For example, for 'eb status':
     $ cd project/root/dir
     $ ./path/to/eb status
     Load sectioned config file: project/root/dir/.elasticbeanstalk/config
-    Warning. File "config" has incorrect access permission and can be accessed by other users.
     Load config file: /home/user/.elasticbeanstalk/aws_credential_file
     URL	: staging-jp48gay9nx.elasticbeanstalk.com
     Status	: Ready

@@ -134,7 +134,7 @@ Other two paths (for branch configs) can now be changed to relative:
 
 Use it
 --------------------------------------------
-Make shure you are using the 'eb' wrapper script from the root project directory.
+Make sure you are using the 'eb' wrapper script from the root project directory.
 For example, for 'eb status':
 
     $ cd project/root/dir

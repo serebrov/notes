@@ -10,10 +10,10 @@ This way it makes configs not useful for other users (except for the case when d
 users have exactly the same files layout).
 Here is how this problem can be fixed:
 
-# Add eb tools under git control
-# Add eb configs under git control
-# Patch eb tools to accept relative file paths
-# Change paths in configs to relative
+1. Add eb tools under git control
+1. Add eb configs under git control
+1. Patch eb tools to accept relative file paths
+1. Change paths in configs to relative
 
 Below are details for each step.
 
@@ -21,8 +21,11 @@ Add eb tools under git control
 --------------------------------------------
 This is necessary because we want all users to have the same tools version.
 Also we are going to make some changes to eb sources to make it understand relative paths.
-So just download [eb tools](http://aws.amazon.com/code/6752709412171743) and extract somewhere inside your project.
-Add a wrapper script to run the original eb tool (script should be on the same lever as the extracted directory):
+
+Just download [eb tools](http://aws.amazon.com/code/6752709412171743) and extract somewhere inside your project.
+Or copy existing version into the project.
+
+Add a wrapper script to run the original eb tool:
 
     #!/bin/sh
 
@@ -35,6 +38,23 @@ Add a wrapper script to run the original eb tool (script should be on the same l
     export PATH=$PATH:$SCRIPT_PATH/AWS-ElasticBeanstalk-CLI-2.5.1/eb/linux/python2.7
     eb "$@"
 
+Script should be on the same lever as the extracted directory.
+For example I have:
+
+    project_root/
+    | .ebextensions/
+    | .elasticbeanstalk/
+    | .git/
+    | application/
+    | console/
+    | | AWS-ElasticBeanstalk-CLI-2.5.1/
+    | | eb*
+    | | ...
+    | ...
+    | .gitignore
+
+So I launch the 'eb' as 'console/eb parameters' from the project root directory.
+
 Add eb configs under git control
 --------------------------------------------
 Add the EB configs under git control:
@@ -44,7 +64,9 @@ Add the EB configs under git control:
 Patch eb tools to accept relative file paths
 --------------------------------------------
 For the 2.5.1 version I had to make two changes in the config file parser class.
+
 The file path is .../AWS-ElasticBeanstalk-CLI-2.5.1/eb/linux/python2.7/lib/utility/configfile_parser.py.
+
 And the changes are:
 
     [Lines 41 - 47]
@@ -90,6 +112,7 @@ I had three absolute paths in my ./elasticbeanstalk/config:
 
 Path to aws credential file can be easily fixed by just removing it - eb tools will use
 config from your home dir by default (~/.elacticbeanstalk/aws_credential_file).
+
 Other two paths (for branch configs) can now be changed to relative:
 
     [global]

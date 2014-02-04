@@ -3,7 +3,7 @@ Git - how to revert multiple recent commits
 
 Let's assume we have a history like this:
 
-   G1 - G2 - G3 - B1 - B2 - B3
+    G1 - G2 - G3 - B1 - B2 - B3
 
 Where G1-G3 are 'good' commits and B1-B3 are 'bad' commits and we
 want to revert them.
@@ -26,6 +26,17 @@ Range specified with two dots like <rev1>..<rev2> includes only
 commits reachable from <rev2>, but not reachable from <rev1> (see `man -7 gitrevisions`).
 Since we need to include B3 (represented by HEAD~2) we use HEAD~2^ (its parent) or HEAD~3 (also parent of HEAD~2).
 The `HEAD~2^` syntax is more convenient if commit SHAs are used to name commits.
+
+The `--no-commit` option tells git to do the revert, but do not
+commit it automatically. So now we can review the repository state and commit it.
+After that we will get the history like this:
+
+    G1 - G2 - G3 - B1 - B2 - B3 - R'
+
+Where `R'` is revert commit which will return repository state to the commit `G3`.
+Run git diff to check this (output should be empty):
+
+    $ git diff HEAD~4 HEAD
 
 Another way to run revert is to specify commits one by one from newest to oldest:
 

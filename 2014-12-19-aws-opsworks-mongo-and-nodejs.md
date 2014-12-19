@@ -15,9 +15,9 @@ The OpsWorks setup includes:
 * One [Application](http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps.html) - this is the code we will deploy
 
 MongoDb setup is based on [this blog post](http://blogs.aws.amazon.com/application-management/post/Tx1RB65XDMNVLUA/Deploying-MongoDB-with-OpsWorks).
-We will use [MongoDB Chef cookbook](https://github.com/edelight/chef-mongodb) which allows to deploy different MongoDB setups - single instance,
+We will use [MongoDB Chef cookbook](https://github.com/edelight/chef-mongodb) which allow us to deploy different MongoDB setups - single instance,
 replica set, sharding, replica sets with sharding.
-It also allows to manage mongo users and setup [MongoDB Monitoring System (MMS)](https://mms.mongodb.com/) agent.
+It also possible to manage mongo users and setup [MongoDB Monitoring System (MMS)](https://mms.mongodb.com/) agent.
 
 Also the detailed step-by-step guide on working with OpsWorks UI is [here](http://docs.aws.amazon.com/opsworks/latest/userguide/gettingstarted_intro.html), so
 I will describe only important steps and problems I had.
@@ -76,7 +76,7 @@ In my case I used private bitbucket repository with following structure:
 └── README.md
 ```
 
-Here I have custom recipe for mongodb setup (descibed below) and for the nodeapp.
+Here I have custom recipe for mongodb setup (described below) and for the nodeapp.
 The nodeapp/metadata.rb just contains a cookbook metadata, see [example](https://github.com/aws/opsworks-cookbooks/blob/release-chef-11.10/opsworks_nodejs/metadata.rb).
 The recipes/default.rb is this:
 
@@ -157,7 +157,7 @@ It uses the custom chef recipe from our cookbook repository:
 │   ├── ...
 ```
 
-Here we have Berksfile which descibes dependencies:
+Here we have Berksfile which describes dependencies:
 
 ```ruby
 source 'https://supermarket.getchef.com'
@@ -209,7 +209,7 @@ Add an application (from `Apps` page). Essential parameters are:
 * Add an environment variable: NODE_ENV - production
 
 Now go to 'Deployments' and deploy an app.
-If everyting is done right it will setup mongodb and node.js and deploy application code.
+If everything is done right it will setup mongodb and node.js and deploy application code.
 In the case of failure the OpsWorks will display a link to the log file.
 
 ## Additional information and related links
@@ -238,4 +238,5 @@ OpsWorks, Chef and Ruby:
 * [Stackoverflow: what ruby features are used in chef recipes?](http://stackoverflow.com/questions/20569521/what-ruby-features-are-used-in-chef-recipes)
 * [Stackoverflow: Ruby Code Blocks and Chef](http://stackoverflow.com/questions/19719968/ruby-code-blocks-and-chef/19726723#19726723)
 
-Hosted MongoDB: [compose.io (as I understand former MongoHQ)](https://www.compose.io/mongodb/), [MongoDirector](http://mongodirector.com/), [mongolab](https://mongolab.com/), [ObjectRocket](http://objectrocket.com/), [dotCloud](http://docs.dotcloud.com/services/mongodb/) and .
+Hosted MongoDB:
+[compose.io (as I understand former MongoHQ)](https://www.compose.io/mongodb/), [MongoDirector](http://mongodirector.com/), [mongolab](https://mongolab.com/), [ObjectRocket](http://objectrocket.com/) and [dotCloud](http://docs.dotcloud.com/services/mongodb/).

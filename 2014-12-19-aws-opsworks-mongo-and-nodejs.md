@@ -1,7 +1,7 @@
 Amazon OpsWorks - node.js app with MongoDB setup
 ============================================
 
-[Amazon OpsWorks](http://docs.aws.amazon.com/opsworks/latest/userguide/welcome.html) provides a way to manage AWS resources 
+[Amazon OpsWorks](http://docs.aws.amazon.com/opsworks/latest/userguide/welcome.html) provides a way to manage AWS resources
 using [Chef recipes](http://docs.chef.io/recipes.html).
 
 Here I describe a simple setup of the single-instance node.js app with single-node MongoDB server.
@@ -187,3 +187,55 @@ include_recipe "mongodb::default"
 
 The important part here is the first string where we app instance private ip to the 'bind_ip' parameter.
 This way the MongoDB instance will be available to our node.js app server.
+
+The way I set the `bind_ip` parameter is different from the [recommended](https://github.com/edelight/chef-mongodb#single-mongodb-instance)
+because I had an [issue with recommended setup](https://github.com/edelight/chef-mongodb#single-mongodb-instance).
+Also it is necessary to use Amazon Linux instance for mongo because there is also a problem (solvable, but I didn't tested the solution) with ubuntu setup.
+
+Now open the mongo layer in the OpsWorks UI, 'Recipes' settings and add our custom `mongodb-singlenode::default` recipe to the 'Setup' step.
+
+## Finalize the setup
+
+Now add one instance to each layer. You can do this from both `Layers` and `Instances` page in the OpsWorks UI.
+I use Ubuntu 14.04 for node.js app layer and Amazon Linux 2014.09 for mongo layer.
+Put some meaningful name to the mongo instance `Hostname` parameter - this data goes to `/etc/hosts` on each instance.
+
+For example, if the mongo host is 'my-app-db' then the node.js app can connect to the database using `mongodb://my-app-db/dbname` connection string.
+
+Add an application (from `Apps` page). Essential parameters are:
+* Type - Node.js
+* Data source type - None (we use custom mongo setup)
+* Set repository parameters
+* Add an environment variable: NODE_ENV - production
+
+Now go to 'Deployments' and deploy an app.
+If everyting is done right it will setup mongodb and node.js and deploy application code.
+In the case of failure the OpsWorks will display a link to the log file.
+
+## Additional information and related links
+
+* MongoDB documentation [has a section about setup on Amazon EC2](http://docs.mongodb.org/ecosystem/platforms/amazon-ec2/).
+* Already mentioned [blog post](http://blogs.aws.amazon.com/application-management/post/Tx1RB65XDMNVLUA/Deploying-MongoDB-with-OpsWorks) about mongo setup with OpsWorks and another [blog post about replicaset setup](http://netinlet.com/blog/2014/01/18/setting-up-a-mongodb-replicaset-with-aws-opsworks/).
+* OpsWorks [cookbooks repository](https://github.com/aws/opsworks-cookbooks/tree/release-chef-11.4)
+* [Stackoverflow: setting up mongodb via AWS opsworks](http://stackoverflow.com/questions/18637735/setting-up-mongodb-via-aws-opsworks)
+* [opsworks-mongodb-example repository](https://github.com/ujuettner/opsworks-mongodb-example)
+* [MongoDB on AWS (RDS-Style)](https://github.com/9apps/mongodb)
+* [Fault Tolerant MongoDB on EC2](http://softwarebyjosh.com/2012/03/11/elastic-ips-and-mongodb-replica-sets.html)
+* [NoSQL Database in the Cloud: MongoDB on AWS](https://media.amazonwebservices.com/AWS_NoSQL_MongoDB.pdf)
+* [High Performance MongoDB Clusters with Amazon EBS Provisioned IOPS](http://www.slideshare.net/AmazonWebServices/ebs-mongo-dbwebinarfinal-nn)
+* [Building a Mongo Replica Set with Chef and Vagrant article](https://medium.com/@polkaspots/building-a-mongo-replica-set-with-chef-and-vagrant-24dc2f59dc90)
+* [Linode: Creating a MongoDB Replication Set on Ubuntu 12.04 (Precise)](https://www.linode.com/docs/databases/mongodb/creating-a-mongodb-replication-set-on-ubuntu-12-04-precise)
+* [Hosting meteor with MongoDb on Webfaction](http://racingtadpole.com/blog/meteor-mongodb-webfaction/)
+
+OpsWorks, Chef and Ruby:
+* [OpsWorks attribute reference](http://docs.aws.amazon.com/opsworks/latest/userguide/attributes.html)
+* [OpsWorks resource reference](https://docs.chef.io/resource.html)
+* [Cookbook repository structure](http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-installingcustom-repo.html)
+* [How to use shell scripts](http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-extend-scripts.html)
+* [Stackoverflow: How I can change a file with chef?](http://stackoverflow.com/questions/14848110/how-i-can-change-a-file-with-chef)
+* [Just Enough Ruby for Chef](https://docs.chef.io/ruby.html)
+* [About the Recipe DSL](https://docs.chef.io/dsl_recipe.html)
+* [Stackoverflow: what ruby features are used in chef recipes?](http://stackoverflow.com/questions/20569521/what-ruby-features-are-used-in-chef-recipes)
+* [Stackoverflow: Ruby Code Blocks and Chef](http://stackoverflow.com/questions/19719968/ruby-code-blocks-and-chef/19726723#19726723)
+
+Hosted MongoDB: [compose.io (as I understand former MongoHQ)](https://www.compose.io/mongodb/), [MongoDirector](http://mongodirector.com/), [mongolab](https://mongolab.com/), [ObjectRocket](http://objectrocket.com/), [dotCloud](http://docs.dotcloud.com/services/mongodb/) and .

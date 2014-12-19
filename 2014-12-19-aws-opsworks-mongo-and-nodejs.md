@@ -130,7 +130,7 @@ check host node_web_app_<%= @application_name %> with address 127.0.0.1
 ```
 
 This way we setup monit to run and monitor the test app.
-App is started with command like `PORT=3300 NODE_ENV=production path/to/deployment/current/app-test/bin/www'.
+App is started with command like `PORT=3300 NODE_ENV=production path/to/deployment/current/app-test/bin/www`.
 
 Now change the layer settings:
 * Custom recipe

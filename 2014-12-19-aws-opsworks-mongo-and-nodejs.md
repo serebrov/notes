@@ -15,14 +15,14 @@ The OpsWorks setup includes:
 * One [Application](http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps.html) - this is the code we will deploy
 
 MongoDb setup is based on [this blog post](http://blogs.aws.amazon.com/application-management/post/Tx1RB65XDMNVLUA/Deploying-MongoDB-with-OpsWorks).
-We will use [MongoDB Chef cookbook](https://github.com/edelight/chef-mongodb) which allow us to deploy different MongoDB setups - single instance,
+We will use [MongoDB Chef cookbook](https://github.com/edelight/chef-mongodb) which allows us to deploy different MongoDB setups - single instance,
 replica set, sharding, replica sets with sharding.
-It also possible to manage mongo users and setup [MongoDB Monitoring System (MMS)](https://mms.mongodb.com/) agent.
+It is also possible to manage mongo users and setup [MongoDB Monitoring System (MMS)](https://mms.mongodb.com/) agent.
 
-Also the detailed step-by-step guide on working with OpsWorks UI is [here](http://docs.aws.amazon.com/opsworks/latest/userguide/gettingstarted_intro.html), so
+See the detailed step-by-step guide on working with OpsWorks UI is [here](http://docs.aws.amazon.com/opsworks/latest/userguide/gettingstarted_intro.html).
 I will describe only important steps and problems I had.
 Also the difference from the standard setup is that I actually launched two node apps on the node.js server instance - the main application and
-the test application (both are in the same repository).
+the test application (both are from the same source code repository).
 
 * Create a new stack, set a name and check other default parameters
  * It is good to create and set the 'Default SSH key', so you will be able to ssh to instances later to debug problems with the setup
@@ -31,7 +31,7 @@ the test application (both are in the same repository).
 
 ## Node.js layer setup.
 
-As I mentioned above I have two node apps which I wanted to launch on the same server - main app and test app.
+As mentioned above, I have two node apps which I wanted to launch on the same server - main app and test app.
 The main app works on the port 80 and the test app on the 3300.
 Repository structure is this:
 
@@ -39,10 +39,10 @@ Repository structure is this:
 ├── app
 ├── public
 ├── package.json
-├── server.js
+├── server.js - this is the main app entry point
 ├── ...
 └── test-app
-    ├── bin/www - this is the main app entry point
+    ├── bin/www - this is the test app entry point
     ├── app.js
     ├── ...
 ```
@@ -55,7 +55,7 @@ The [standard node.js layer](http://docs.aws.amazon.com/opsworks/latest/userguid
 In my case the main app already had the required layout (it is based on [mean.js](http://meanjs.org/)).
 I only had to setup port 80 for the production environment.
 
-And the test app required a simple custom chef recipe and some additional layer settings.
+The test app requires a simple custom chef recipe and some additional layer settings.
 To use custom recipes it is necessary to create a separate [cookbook repository](http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-installingcustom-repo.html).
 It can be, for example, public or private git repository on github or bitbucket.
 In my case I used private bitbucket repository with following structure:
@@ -76,7 +76,7 @@ In my case I used private bitbucket repository with following structure:
 └── README.md
 ```
 
-Here I have custom recipe for mongodb setup (described below) and for the nodeapp.
+Here I have custom recipe for mongodb setup (it is described below) and a custom recipe with template for the node app.
 The nodeapp/metadata.rb just contains a cookbook metadata, see [example](https://github.com/aws/opsworks-cookbooks/blob/release-chef-11.10/opsworks_nodejs/metadata.rb).
 The recipes/default.rb is this:
 
@@ -109,7 +109,7 @@ template "#{node.default[:monit][:conf_dir]}/node_web_app-app-test.monitrc" do
 end
 ```
 
-This recipes invokes `npm install -d` inside the test app folder and then creates a monit service config.
+This recipe invokes `npm install -d` inside the test app folder and then creates a monit service config.
 So our test app will be watched by monit and restarted in the case of failure.
 This is the same setup the standard OpsWorks node.js layer uses for the main application.
 
@@ -165,7 +165,7 @@ source 'https://supermarket.getchef.com'
 cookbook 'mongodb'
 ```
 
-The `mongodb-singlenode/metadata.rb` with dependency info:
+The `mongodb-singlenode/metadata.rb` with recipe dependency info:
 
 ```ruby
 name        "mongodb-singlenode"
@@ -185,7 +185,7 @@ node.normal[:mongodb][:config][:bind_ip] = "127.0.0.1,#{node[:opsworks][:instanc
 include_recipe "mongodb::default"
 ```
 
-The important part here is the first string where we app instance private ip to the 'bind_ip' parameter.
+The important part here is the first string where we add instance's private ip to the 'bind_ip' parameter.
 This way the MongoDB instance will be available to our node.js app server.
 
 The way I set the `bind_ip` parameter is different from the [recommended](https://github.com/edelight/chef-mongodb#single-mongodb-instance)
@@ -196,9 +196,10 @@ Now open the mongo layer in the OpsWorks UI, 'Recipes' settings and add our cust
 
 ## Finalize the setup
 
-Now add one instance to each layer. You can do this from both `Layers` and `Instances` page in the OpsWorks UI.
+Now add one instance to each layer. You can do this from both `Layers` and `Instances` pages in the OpsWorks UI.
 I use Ubuntu 14.04 for node.js app layer and Amazon Linux 2014.09 for mongo layer.
-Put some meaningful name to the mongo instance `Hostname` parameter - this data goes to `/etc/hosts` on each instance.
+
+Give some meaningful name for the mongo instance (the `Hostname` parameter). This data goes to `/etc/hosts` on each instance.
 
 For example, if the mongo host is 'my-app-db' then the node.js app can connect to the database using `mongodb://my-app-db/dbname` connection string.
 
